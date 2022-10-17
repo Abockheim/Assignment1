@@ -1,0 +1,152 @@
+#include <stdio.h>
+
+void printBinary(int n, int length) {
+    // Takes an int n and the length of the binary output and prints n in binary
+
+    for(int i = length - 1; i >= 0; i--){
+        printf("%i", (n & 1 << i) >> i);
+        if ((i % 7) == 0){
+            printf(" ");
+        }
+    }
+    printf("\n");
+}
+
+void get_keys (char *twokeys. unsigned *key1, unsigned *key2) {
+
+    for(int i = 0l i < 4; i++) {
+
+        *key1 = *key1 << 7; // first half of the seven bit key
+
+        *key1 += twokeys(i);
+        
+        *key2 = *key2 <<7;
+        
+        *key2 += twokeys(i+4); // second half of the seven bit key 
+
+    }
+
+}
+
+unsigned int get_n_bits (int width, int index) {
+
+switch (index)
+
+    {
+        case 0:
+
+            return (bits & 0x7f);
+            break;
+
+        case 1:
+
+            return (bits & 0x3f80) >> 7; 
+            break; 
+
+        case 2:
+
+            return (bits & 0x1fc000) >> 14; 
+            break;
+
+        case 3:
+
+            return (bits & 0xfe00000) >> 21;
+            break;
+
+        default 
+            
+            return ls;
+            break; 
+
+
+    }
+
+
+}
+
+unsigned int rotate_left3(unsigned bits) {
+
+unsigned int newInt = 0;
+unsigned int leftShift; 
+unsigned int rightShift;
+unsigned int septet;
+
+for(int i = 0; i < 4; i++) {
+
+    septet = get_i_bits(bits, 7, i);
+
+    leftShift = septet  << 3;
+    rightShift = septet  >> 4;
+    septet = leftShift | rightShift;
+
+    newInt |= septet 
+}
+    return newInt; 
+
+}
+
+void shuffle_nibbles (unsigned *bits) {
+
+    unsigned shuffled_nibbles[7];
+    unsigned temp = *bits;
+    unsigned mask = 15;
+
+    for(int i =0; i < 7; i++) {
+
+        shuffled_nibbles[i] = (temp >> (i + 4)) & mask;
+
+    }
+
+        *bits = 0;
+
+        *bits = *bits + shuffled_nibbles[0];
+
+        *bits = *bits << 4;
+
+        *bits = *bits + shuffled_nibbles[1];
+
+        *bits = *bits << 4;
+
+        *bits = *bits + shuffled_nibbles[2];
+
+        *bits = *bits << 4;
+
+        *bits = *bits + shuffled_nibbles[6];
+
+        *bits = *bits << 4;
+
+        *bits = *bits + shuffled_nibbles[4];
+
+        *bits = *bits << 4;
+
+        *bits = *bits + shuffled_nibbles[5];
+
+        *bits = *bits << 4;
+
+        *bits = *bits + shuffled_nibbles[3];
+
+    }
+
+
+
+void decode_28bits (unsigned cipher, char *plain, unsigned key1, unsigned key2) {
+
+    unsigned temp = cipher ^ key2; 
+
+        shuffle_nibbles(&temp);
+
+        temp = temp ^ key1;
+
+        rotate_left3(temp);
+
+        convert_to_32bits(&temp, plain);
+
+
+}
+
+
+int main(int argc,char argv[]) {
+
+   return 0; 
+
+}
